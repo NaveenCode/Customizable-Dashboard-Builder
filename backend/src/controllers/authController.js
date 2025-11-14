@@ -2,11 +2,9 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import pool from "../config/database.js";
 
-// Register new user
 export const register = async (req, res) => {
   const { email, password } = req.body;
 
-  // Validation
   if (!email || !password) {
     return res.status(400).json({
       success: false,
@@ -24,7 +22,6 @@ export const register = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    // Check if user already exists
     const existingUser = await client.query(
       "SELECT * FROM users WHERE email = $1",
       [email]
@@ -37,10 +34,8 @@ export const register = async (req, res) => {
       });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const result = await client.query(
       "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email, created_at",
       [email, hashedPassword]
@@ -48,13 +43,11 @@ export const register = async (req, res) => {
 
     const user = result.rows[0];
 
-    // Create empty dashboard for new user
     await client.query(
       "INSERT INTO dashboards (user_id, widgets) VALUES ($1, $2)",
       [user.id, JSON.stringify([])]
     );
 
-    // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET,
@@ -82,11 +75,9 @@ export const register = async (req, res) => {
   }
 };
 
-// Login user
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
-  // Validation
   if (!email || !password) {
     return res.status(400).json({
       success: false,
@@ -97,7 +88,6 @@ export const login = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    // Find user
     const result = await client.query("SELECT * FROM users WHERE email = $1", [
       email,
     ]);
@@ -111,7 +101,6 @@ export const login = async (req, res) => {
 
     const user = result.rows[0];
 
-    // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (!isValidPassword) {
@@ -121,7 +110,6 @@ export const login = async (req, res) => {
       });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET,
@@ -149,7 +137,6 @@ export const login = async (req, res) => {
   }
 };
 
-// Logout
 export const logout = (req, res) => {
   res.json({
     success: true,
@@ -157,7 +144,6 @@ export const logout = (req, res) => {
   });
 };
 
-// Verify token
 export const verify = (req, res) => {
   res.json({
     success: true,

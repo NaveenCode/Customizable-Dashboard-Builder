@@ -1,6 +1,5 @@
 import pool from "../config/database.js";
 
-// Get user's dashboard
 export const getDashboard = async (req, res) => {
   const userId = req.user.userId;
   const client = await pool.connect();
@@ -12,7 +11,6 @@ export const getDashboard = async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      // If no dashboard exists, create one with empty widgets
       await client.query(
         "INSERT INTO dashboards (user_id, widgets) VALUES ($1, $2)",
         [userId, JSON.stringify([])]
@@ -43,12 +41,10 @@ export const getDashboard = async (req, res) => {
   }
 };
 
-// Save user's dashboard
 export const saveDashboard = async (req, res) => {
   const userId = req.user.userId;
   const { widgets } = req.body;
 
-  // Validation
   if (!widgets || !Array.isArray(widgets)) {
     return res.status(400).json({
       success: false,
@@ -59,7 +55,6 @@ export const saveDashboard = async (req, res) => {
   const client = await pool.connect();
 
   try {
-    // Update or insert dashboard
     const result = await client.query(
       `INSERT INTO dashboards (user_id, widgets, updated_at)
        VALUES ($1, $2, CURRENT_TIMESTAMP)

@@ -4,8 +4,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const { Pool } = pg;
-
-// Create PostgreSQL connection pool
 const pool = new Pool({
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -14,7 +12,6 @@ const pool = new Pool({
   password: process.env.DB_PASSWORD,
 });
 
-// Test connection
 pool.on("connect", () => {
   console.log("✅ Connected to PostgreSQL database");
 });
@@ -24,12 +21,10 @@ pool.on("error", (err) => {
   process.exit(-1);
 });
 
-// Initialize database tables
 export const initDatabase = async () => {
   const client = await pool.connect();
 
   try {
-    // Create users table
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
@@ -39,7 +34,6 @@ export const initDatabase = async () => {
       )
     `);
 
-    // Create dashboards table
     await client.query(`
       CREATE TABLE IF NOT EXISTS dashboards (
         id SERIAL PRIMARY KEY,

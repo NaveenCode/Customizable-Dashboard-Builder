@@ -2,6 +2,18 @@
 
 A full-stack customizable dashboard application with user authentication and widget management.
 
+## 🚀 Deploy for FREE!
+
+Want to show this to others? Deploy for **$0** in 15 minutes:
+
+**📖 [Quick Deploy Guide](./QUICK_DEPLOY.md)** - Fast 15-minute setup
+**📚 [Full Deployment Guide](./FREE_DEPLOYMENT.md)** - Detailed with screenshots
+
+**Recommended Stack (100% Free):**
+- Frontend: Vercel
+- Backend: Render
+- Database: Render PostgreSQL
+
 ## Features
 
 - 🔐 User authentication (JWT-based)

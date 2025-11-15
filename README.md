@@ -10,6 +10,7 @@ Want to show this to others? Deploy for **$0** in 15 minutes:
 **📚 [Full Deployment Guide](./FREE_DEPLOYMENT.md)** - Detailed with screenshots
 
 **Recommended Stack (100% Free):**
+
 - Frontend: Vercel
 - Backend: Render
 - Database: Render PostgreSQL
@@ -27,12 +28,14 @@ Want to show this to others? Deploy for **$0** in 15 minutes:
 ## Tech Stack
 
 ### Backend
+
 - Node.js + Express.js
 - PostgreSQL with JSONB
 - JWT authentication
 - bcrypt for password hashing
 
 ### Frontend
+
 - Next.js 16 (App Router)
 - React 19
 - Zustand (state management)
@@ -42,6 +45,7 @@ Want to show this to others? Deploy for **$0** in 15 minutes:
 ## Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - PostgreSQL 14+
 
@@ -77,6 +81,7 @@ npm run dev
 ```
 
 The server will:
+
 1. Connect to PostgreSQL
 2. **Automatically create tables** (users, dashboards)
 3. Start listening on port 5000
@@ -117,6 +122,7 @@ This runs every time the server starts. It's safe because of `IF NOT EXISTS`.
 ### Schema Details
 
 **Users Table**:
+
 ```sql
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
@@ -127,6 +133,7 @@ CREATE TABLE users (
 ```
 
 **Dashboards Table**:
+
 ```sql
 CREATE TABLE dashboards (
   id SERIAL PRIMARY KEY,
@@ -140,12 +147,14 @@ CREATE TABLE dashboards (
 ## API Endpoints
 
 ### Authentication
+
 - `POST /auth/register` - Register new user
 - `POST /auth/login` - Login user
 - `GET /auth/verify` - Verify JWT token
 - `POST /auth/logout` - Logout user
 
 ### Dashboard
+
 - `GET /dashboard` - Get user's dashboard
 - `POST /dashboard` - Save dashboard widgets
 
@@ -195,16 +204,19 @@ See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 ### Quick Deploy Options
 
 **Render** (Recommended for beginners):
+
 1. Connect your GitHub repo
 2. Add PostgreSQL database (automatic)
 3. Set environment variables
 4. Deploy! Tables created automatically ✨
 
 **Vercel + Railway**:
+
 - Frontend: Deploy to Vercel
 - Backend + DB: Deploy to Railway
 
 **Docker**:
+
 ```bash
 docker-compose up -d
 ```
@@ -214,12 +226,14 @@ Everything is containerized and ready to go!
 ## Development
 
 ### Backend
+
 ```bash
 cd backend
 npm run dev  # Runs with nodemon (auto-restart)
 ```
 
 ### Frontend
+
 ```bash
 cd frontend
 npm run dev  # Hot reload enabled
@@ -250,6 +264,7 @@ error: role "postgres" does not exist
 ```
 
 **Solution**: Update `.env` with your PostgreSQL username:
+
 ```env
 DB_USER=your_username  # Usually your macOS username
 ```
@@ -257,6 +272,7 @@ DB_USER=your_username  # Usually your macOS username
 ### Tables Not Created
 
 **Solution**: Check server logs for:
+
 ```
 ✅ Connected to PostgreSQL database
 ✅ Database tables initialized
@@ -293,6 +309,7 @@ Built with ❤️ for learning full-stack development
 ---
 
 **Key Features:**
+
 - ✅ Automatic database schema management
 - ✅ JWT authentication
 - ✅ Real-time widgets

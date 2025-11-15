@@ -65,21 +65,21 @@ export default function AddWidgetModal({ isOpen, onClose }) {
             return (
               <div
                 key={widget.type}
-                className="border border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition cursor-pointer"
+                className="border border-gray-200 rounded-lg p-6 hover:border-blue-500 hover:shadow-md transition cursor-pointer flex flex-col h-full"
                 onClick={() => handleAddWidget(widget.type)}
               >
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-center text-center flex-1">
                   <div className="mb-3 text-blue-600">
                     <Icon size={48} />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">
                     {widget.name}
                   </h3>
-                  <p className="text-sm text-gray-600">{widget.description}</p>
-                  <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition w-full">
-                    Add
-                  </button>
+                  <p className="text-sm text-gray-600 flex-1">{widget.description}</p>
                 </div>
+                <button className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition w-full">
+                  Add
+                </button>
               </div>
             );
           })}

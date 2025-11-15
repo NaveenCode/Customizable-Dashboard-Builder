@@ -1,14 +1,12 @@
-import { create } from 'zustand';
-import { dashboardAPI } from '../lib/api';
+import { create } from "zustand";
+import { dashboardAPI } from "../lib/api";
 
 const useDashboardStore = create((set, get) => ({
-  // State
   widgets: [],
   isLoading: false,
   error: null,
   user: null,
 
-  // Actions
   setUser: (user) => set({ user }),
 
   addWidget: (widget) =>
@@ -37,7 +35,7 @@ const useDashboardStore = create((set, get) => ({
       set({ widgets: response.widgets || [], isLoading: false });
     } catch (error) {
       set({
-        error: error.response?.data?.message || 'Failed to load dashboard',
+        error: error.response?.data?.message || "Failed to load dashboard",
         isLoading: false,
       });
     }
@@ -52,7 +50,7 @@ const useDashboardStore = create((set, get) => ({
       return { success: true };
     } catch (error) {
       set({
-        error: error.response?.data?.message || 'Failed to save dashboard',
+        error: error.response?.data?.message || "Failed to save dashboard",
         isLoading: false,
       });
       return { success: false, error: error.response?.data?.message };

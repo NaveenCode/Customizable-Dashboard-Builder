@@ -1,13 +1,23 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { LogOut } from 'lucide-react';
-import { removeAuthToken } from '@/lib/auth';
+import { removeAuthToken, getUserFromToken } from '@/lib/auth';
 import useDashboardStore from '@/store/useDashboardStore';
 
 export default function Navbar() {
   const router = useRouter();
-  const { user, clearStore } = useDashboardStore();
+  const { user, setUser, clearStore } = useDashboardStore();
+
+  useEffect(() => {
+    if (!user) {
+      const userFromToken = getUserFromToken();
+      if (userFromToken) {
+        setUser(userFromToken);
+      }
+    }
+  }, [user, setUser]);
 
   const handleLogout = () => {
     removeAuthToken();
